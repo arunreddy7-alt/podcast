@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 export default function PodcastLandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +20,18 @@ export default function PodcastLandingPage() {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [showModal]);
 
   useEffect(() => {
     const handleAnchorClick = (e) => {
@@ -107,16 +121,9 @@ export default function PodcastLandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         {/* Content */}
         <div className="max-w-4xl mx-auto mt-20 md:mt-28 lg:mt-40">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight whitespace-nowrap inline-block -ml-10 md:-ml-58 font-poppins text-[#FFFFFF]">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-24 leading-tight whitespace-nowrap inline-block -ml-10 md:-ml-58 font-poppins text-[#FFFFFF] text-center">
             Build People. Grow Businesses. Leave a Mark.
           </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-white leading-relaxed">
-            Welcome to <span className="text-white font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you're living every single day.
-          </p>
-          <a
-            href="#episodes" className="bg-[#D4AF37] text-[#000000] px-8 py-4 rounded-full font-semibold hover:opacity-90 transition text-lg">
-            Listen Now
-          </a>
         </div>
       </section>
 
@@ -126,9 +133,27 @@ export default function PodcastLandingPage() {
   className="py-16 px-8 text-center max-w-5xl mx-auto rounded-xl backdrop-blur-sm mt-12"
 >
   <h2 className="text-4xl md:text-5xl font-bold text-[#1E2E42] mb-6 font-poppins">About us</h2>
+  <p className="text-lg md:text-xl text-black leading-relaxed mb-8">
+    Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you're living every single day.
+  </p>
+  
+  {/* Video Container */}
+  <div className="relative w-full max-w-4xl mx-auto mb-8">
+    <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
+      <video
+        controls
+        className="w-full h-full object-cover"
+        poster="/ep03.jpg"
+      >
+        <source src="/intro-video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+  
   <p className="text-lg md:text-xl text-black leading-relaxed">
     We explore values-based leadership, personal development, mentorship, and how to build a lasting legacy that goes beyond traditional success.
-    It’s time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
+    It's time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
   </p>
 </section>
 
@@ -152,20 +177,23 @@ export default function PodcastLandingPage() {
         <img
           src="/ep03.jpg"
           alt="EP03 | Design Your Destiny"
-          className="w-full h-96 md:h-[28rem] object-cover rounded-xl shadow-2xl"
+          className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl"
         />
       </div>
       <div className="md:w-1/2 flex flex-col gap-6">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP03 | Design Your Destiny: Reverse-Engineering Your Legacy Vision
         </h3>
+        <a href="https://youtu.be/A4BkuRFrDY0?si=oHemWId1OA4FhD_4" target="_blank" className="text-[#1E2E42] hover:underline font-semibold">
+          Watch Trailer
+        </a>
         <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
           This episode offers a structured personal development tool to envision your future impact. Learn how to align your choices today with the legacy you want to be remembered for tomorrow.
         </p>
-        <div className="flex gap-5 flex-wrap mt-2">
-          <a href="https://open.spotify.com/episode/6YAd9bi9tjOshxmGDslTVh?si=fa279ded9fa94fb0" className="bg-[#B69951] text-[#000000] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Listen</a>
-          <a href="https://youtu.be/A4BkuRFrDY0?si=oHemWId1OA4FhD_4" className="bg-[#1E2E42] text-[#FFFFFF] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Watch</a>
-          <a href="#" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Download Map</a>
+        <div className="flex gap-2 flex-wrap mt-2">
+          <a href="https://open.spotify.com/episode/6YAd9bi9tjOshxmGDslTVh?si=fa279ded9fa94fb0" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen in Spotify</a>
+          <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000727064950" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on Apple Podcast</a>
+          <a href="https://youtu.be/A4BkuRFrDY0?si=oHemWId1OA4FhD_4" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on YouTube</a>
         </div>
       </div>
     </div>
@@ -176,20 +204,23 @@ export default function PodcastLandingPage() {
         <img
           src="/ep02.jpg"
           alt="EP02 | Unpacking the 3 Pillars"
-          className="w-full h-96 md:h-[28rem] object-cover rounded-xl shadow-2xl"
+          className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl"
         />
       </div>
       <div className="md:w-1/2 flex flex-col gap-6">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP02 | Unpacking the 3 Pillars of a Powerful Legacy
         </h3>
+        <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" target="_blank" className="text-[#1E2E42] hover:underline font-semibold">
+          Watch Trailer
+        </a>
         <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
           Explore the foundational principles of legacy building: Build People. Grow Businesses. Leave a Mark. Featuring insights from the life of Ratan Tata and how these pillars empower leadership and lasting change.
         </p>
-        <div className="flex gap-5 flex-wrap mt-2">
-          <a href="https://open.spotify.com/episode/0YpGbT7gRxNUvkJecDakPg?si=e7efc653133c40ad" className="bg-[#B69951] text-[#000000] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Listen</a>
-          <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" className="bg-[#1E2E42] text-[#FFFFFF] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Watch</a>
-          <a href="#" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Download Reflection</a>
+        <div className="flex gap-2 flex-wrap mt-2">
+          <a href="https://open.spotify.com/episode/0YpGbT7gRxNUvkJecDakPg?si=e7efc653133c40ad" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen in Spotify</a>
+          <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000724132239" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on Apple Podcast</a>
+          <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on YouTube</a>
         </div>
       </div>
     </div>
@@ -200,20 +231,23 @@ export default function PodcastLandingPage() {
         <img
           src="/ep01.jpg"
           alt="EP01 | Beyond Money & Monuments"
-          className="w-full h-96 md:h-[28rem] object-cover rounded-xl shadow-2xl"
+          className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl"
         />
       </div>
       <div className="md:w-1/2 flex flex-col gap-6">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP01 | Beyond Money & Monuments: What's Your True Mark?
         </h3>
+        <a href="https://youtu.be/jTqLnlQO9Ro?si=1SG80K-BQVbKfBj-" target="_blank" className="text-[#1E2E42] hover:underline font-semibold">
+          Watch Trailer
+        </a>
         <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
           In the very first episode of The Legacy Blueprint, we ask a timeless question: beyond wealth and recognition, what truly defines your legacy? This podcast sets the tone for all future episodes on significance, purpose, and intentional impact.
         </p>
-        <div className="flex gap-5 flex-wrap mt-2">
-          <a href="https://open.spotify.com/episode/65uL5CyzsWzUOafWxlyBhE?si=c8d56d1d10414b70" className="bg-[#B69951] text-[#000000] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Listen</a>
-          <a href="https://youtu.be/jTqLnlQO9Ro?si=1SG80K-BQVbKfBj-" className="bg-[#1E2E42] text-[#FFFFFF] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Watch</a>
-          <a href="#" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-6 py-3 rounded-md font-semibold hover:scale-105 transition transform">Download Prompts</a>
+        <div className="flex gap-2 flex-wrap mt-2">
+          <a href="https://open.spotify.com/episode/65uL5CyzsWzUOafWxlyBhE?si=c8d56d1d10414b70" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen in Spotify</a>
+          <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000721960129" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on Apple Podcast</a>
+          <a href="https://youtu.be/jTqLnlQO9Ro?si=1SG80K-BQVbKfBj-" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on YouTube</a>
         </div>
       </div>
     </div>
@@ -221,120 +255,39 @@ export default function PodcastLandingPage() {
 </section>
 
     {/* Contact Section */}
-{/* Contact Section with Right-Aligned Image */}
+{/* Contact Section */}
 <section
   id="contact"
   className="relative py-24 px-6 overflow-hidden bg-gradient-to-b from-[#1E3A8A]/10 to-[#F9F9F9]"
 >
-  {/* Background Creative Elements */}
-  <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#D4AF37]/15 rounded-full filter blur-3xl animate-pulse-slow"></div>
-  <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#1E3A8A]/15 rounded-full filter blur-3xl animate-pulse-slow"></div>
-  <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-[#D4AF37]/10 rounded-full filter blur-2xl"></div>
-
-  <div className="relative max-w-7xl mx-auto z-10 flex flex-col lg:flex-row gap-12 items-start">
-    {/* Left Side - Episode Links */}
-    <div className="flex-1 flex flex-col gap-8">
-      <h2 className="text-5xl md:text-6xl font-bold text-[#1E2E42] mb-4 font-poppins">
-        Contact & Connect
-      </h2>
-      <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
-        Have questions or want to collaborate? Reach out to us at{" "}
-        <span className="text-[#B69951] font-semibold">.com</span>
-      </p>
-
-      {/* Platform Cards */}
-      <div className="grid md:grid-cols-2 gap-8 mt-8">
-        {/* YouTube */}
-        <div className="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition text-left">
-          <h3 className="text-2xl font-bold text-[#B69951] mb-4">YouTube</h3>
-          <ul className="text-[#000000] list-disc list-inside space-y-1 ml-6">
-            <li>
-              <a href="https://youtu.be/jTqLnlQO9Ro?si=1SG80K-BQVbKfBj-" target="_blank" className="hover:underline">
-                Episode 1
-              </a>
-            </li>
-            <li>
-              <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" target="_blank" className="hover:underline">
-                Episode 2
-              </a>
-            </li>
-            <li>
-              <a href="https://youtu.be/A4BkuRFrDY0?si=oHemWId1OA4FhD_4" target="_blank" className="hover:underline">
-                Episode 3
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Spotify */}
-        <div className="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition text-left">
-          <h3 className="text-2xl font-bold text-[#B69951] mb-4">Spotify</h3>
-          <ul className="text-[#000000] list-disc list-inside space-y-1 ml-6">
-            <li>
-              <a href="https://open.spotify.com/episode/65uL5CyzsWzUOafWxlyBhE?si=c8d56d1d10414b70" target="_blank" className="hover:underline">
-                Episode 1
-              </a>
-            </li>
-            <li>
-              <a href="https://open.spotify.com/episode/0YpGbT7gRxNUvkJecDakPg?si=e7efc653133c40ad" target="_blank" className="hover:underline">
-                Episode 2
-              </a>
-            </li>
-            <li>
-              <a href="https://open.spotify.com/episode/6YAd9bi9tjOshxmGDslTVh?si=fa279ded9fa94fb0" target="_blank" className="hover:underline">
-                Episode 3
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Apple Podcast */}
-        <div className="bg-white/80 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition text-left">
-          <h3 className="text-2xl font-bold text-[#B69951] mb-4">Apple Podcast</h3>
-          <ul className="text-[#000000] list-disc list-inside space-y-1 ml-6">
-            <li>
-              <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000721960129" target="_blank" className="hover:underline">
-                Episode 1
-              </a>
-            </li>
-            <li>
-              <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000724132239" target="_blank" className="hover:underline">
-                Episode 2
-              </a>
-            </li>
-            <li>
-              <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000727064950" target="_blank" className="hover:underline">
-                Episode 3
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <div className="relative max-w-7xl mx-auto z-10 text-center">
+    <h2 className="text-5xl md:text-6xl font-bold text-[#1E2E42] mb-4 font-poppins">
+      Contact & Connect
+    </h2>
+    <p className="text-lg md:text-xl text-[#000000] leading-relaxed mb-8">
+      Have questions or want to collaborate? Reach out to us
+      <span className="text-[#B69951] font-semibold"></span>
+    </p>
+    <div className="flex gap-4 w-full">
+      <button 
+        onClick={() => {
+          setModalType('contact');
+          setShowModal(true);
+        }}
+        className="flex-1 bg-[#B69951] text-[#000000] px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition text-lg"
+      >
+        Contact Us
+      </button>
+      <button 
+        onClick={() => {
+          setModalType('collaborate');
+          setShowModal(true);
+        }}
+        className="flex-1 bg-[#1E2E42] text-[#FFFFFF] px-8 py-4 rounded-lg font-semibold hover:opacity-90 transition text-lg"
+      >
+        Collaborate
+      </button>
     </div>
-
-    {/* Right Side - Image */}
-    <div className="flex-1 flex justify-end">
-      <img
-        src="/contact-side-image.jpg"
-        alt="Collaboration Graphic"
-        className="rounded-3xl shadow-xl w-full max-w-lg object-cover"
-      />
-    </div>
-  </div>
-
-  {/* Bottom Wave */}
-  <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-0">
-    <svg
-      className="relative block w-full h-32"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 1440 320"
-    >
-      <path
-        fill="#F9F9F9"
-        fillOpacity="1"
-        d="M0,64L1440,192L1440,0L0,0Z"
-      ></path>
-    </svg>
   </div>
 </section>
 
@@ -408,6 +361,58 @@ export default function PodcastLandingPage() {
     </section>
   </div>
 </footer>
+
+  {/* Modal */}
+  {showModal && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Blurred Background */}
+      <div 
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={() => setShowModal(false)}
+      ></div>
+      
+      {/* Modal Content */}
+      <div className="relative bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+        <button
+          onClick={() => setShowModal(false)}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl"
+        >
+          ×
+        </button>
+        
+        <h3 className="text-2xl font-bold text-[#1E2E42] mb-6 text-center">
+          {modalType === 'contact' ? 'Contact Us' : 'Collaborate With Us'}
+        </h3>
+        
+        <form className="space-y-4">
+          <input
+            type="text"
+            placeholder="Your Name"
+            required
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            required
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
+          />
+          <textarea
+            placeholder={modalType === 'contact' ? 'Your Message' : 'Collaboration Idea'}
+            required
+            rows={4}
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
+          />
+          <button
+            type="submit"
+            className="w-full bg-[#B69951] text-[#000000] px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition"
+          >
+            {modalType === 'contact' ? 'Send Message' : 'Submit Collaboration'}
+          </button>
+        </form>
+      </div>
+    </div>
+  )}
     </div>
 
   );
