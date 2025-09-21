@@ -1,0 +1,214 @@
+"use client";
+import React, { useState, useEffect } from "react";
+
+export default function PodcastLandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleAnchorClick = (e) => {
+      const href = e.target.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const navbarHeight = 80; // Approximate navbar height
+          const targetPosition = targetElement.offsetTop - navbarHeight;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    // Add event listeners to all anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', handleAnchorClick);
+    });
+
+    // Cleanup event listeners on unmount
+    return () => {
+      anchorLinks.forEach(link => {
+        link.removeEventListener('click', handleAnchorClick);
+      });
+    };
+  }, []);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#f2f2f2] text-[#333333]">
+      {/* Navbar */}
+      <nav className="bg-transparent fixed top-0 left-0 w-full z-50 shadow-md">
+        <div className="max-w-6xl mx-auto px-2 py-2 flex items-center">
+          {/* Logo shifted slightly left */}
+          <img
+            src="/logo.png"
+            alt="The Legacy Blueprint"
+            className="h-20 w-auto text-[#D4AF37] filter brightness-0 invert mr-18 -ml-26"
+          />
+          {/* Desktop Links */}
+          <div className="hidden md:flex gap-12 text-[#FFFFFF] ml-auto">
+            <a href="#home" className="hover:text-[#D4AF37] transition text-white">Home</a>
+            <a href="#about" className="hover:text-[#D4AF37] transition text-white">About</a>
+            <a href="#episodes" className="hover:text-[#D4AF37] transition text-white">Episodes</a>
+            <a href="#contact" className="hover:text-[#D4AF37] transition text-white">Contact</a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-[#FFFFFF] focus:outline-none ml-auto"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-transparent px-6 py-4 flex flex-col gap-4 text-[#FFFFFF]">
+            <a href="#home" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>Home</a>
+            <a href="#about" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>About</a>
+            <a href="#episodes" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>Episodes</a>
+            <a href="#contact" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>Contact</a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section
+        id="home"
+        className="min-h-screen flex items-center justify-center px-6 text-center relative"
+        style={{
+          backgroundImage: "url('/bg1.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat"
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
+        {/* Content */}
+        <div className="max-w-4xl mx-auto mt-20 md:mt-28 lg:mt-40">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight whitespace-nowrap inline-block -ml-10 md:-ml-58 font-poppins text-[#FFFFFF]">
+            Build People. Grow Businesses. Leave a Mark.
+          </h1>
+          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-white leading-relaxed">
+            Welcome to <span className="text-white font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you're living every single day.
+          </p>
+          <a
+            href="#episodes" className="bg-[#D4AF37] text-[#000000] px-8 py-4 rounded-full font-semibold hover:opacity-90 transition text-lg">
+            Listen Now
+          </a>
+        </div>
+      </section>
+
+      {/* About Section */}
+<section
+  id="about"
+  className="py-16 px-8 text-center max-w-5xl mx-auto rounded-xl backdrop-blur-sm mt-12"
+>
+  <h2 className="text-4xl md:text-5xl font-bold text-[#1E2E42] mb-6 font-poppins">About us</h2>
+  <p className="text-lg md:text-xl text-black leading-relaxed">
+    We explore values-based leadership, personal development, mentorship, and how to build a lasting legacy that goes beyond traditional success.
+    It’s time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
+  </p>
+</section>
+
+
+ {/* Episodes Section */}
+<section id="episodes" className="py-20 px-6 mt-8">
+  <h2 className="text-5xl md:text-6xl font-bold text-center text-[#1E2E42] mb-16 font-poppins">Latest Episodes</h2>
+
+  <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+    {/* Episode 3 */}
+    <div className="flex flex-col md:flex-row items-center gap-8">
+      {/* Image in bigger rectangle box */}
+      <div className="md:w-1/3 bg-[#D4AF37] rounded-xl overflow-hidden h-96 md:h-64">
+        <img
+          src="/ep03.jpg"
+          alt="EP03 | Design Your Destiny"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      {/* Info */}
+      <div className="md:w-2/3 flex flex-col gap-6">
+        <h3 className="text-2xl md:text-3xl font-semibold text-[#1E2E42]">
+          EP03 | Design Your Destiny: Reverse-Engineering Your Legacy Vision
+        </h3>
+        <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
+          This episode offers a structured personal development tool to envision your future impact. Learn how to align your choices today with the legacy you want to be remembered for tomorrow.
+        </p>
+        <div className="flex gap-4 flex-wrap mt-2">
+          <a href="#" className="bg-[#D4AF37] text-[#000000] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Listen</a>
+          <a href="#" className="bg-[#1E3A8A] text-[#FFFFFF] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Watch</a>
+          <a href="#" className="bg-[#F5F5F5] text-[#000000] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Download Visioning Map</a>
+        </div>
+      </div>
+    </div>
+
+    {/* Episode 2 */}
+    <div className="flex flex-col md:flex-row items-center gap-8">
+      <div className="md:w-1/3 bg-[#D4AF37] rounded-xl overflow-hidden h-80 md:h-64">
+        <img
+          src="/ep02.jpg"
+          alt="EP02 | Unpacking the 3 Pillars of a Powerful Legacy"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="md:w-2/3 flex flex-col gap-6">
+        <h3 className="text-2xl md:text-3xl font-semibold text-[#1E2E42]">
+          EP02 | Unpacking the 3 Pillars of a Powerful Legacy
+        </h3>
+        <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
+          Explore the foundational principles of legacy building: Build People. Grow Businesses. Leave a Mark. Featuring insights from the life of Ratan Tata and how these pillars empower leadership and lasting change.
+        </p>
+        <div className="flex gap-4 flex-wrap mt-2">
+          <a href="#" className="bg-[#D4AF37] text-[#000000] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Listen</a>
+          <a href="#" className="bg-[#1E3A8A] text-[#FFFFFF] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Watch</a>
+          <a href="#" className="bg-[#F5F5F5] text-[#000000] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Download Legacy Pillar Reflection</a>
+        </div>
+      </div>
+    </div>
+
+    {/* Episode 1 */}
+    <div className="flex flex-col md:flex-row items-center gap-8">
+      <div className="md:w-1/3 bg-[#D4AF37] rounded-xl overflow-hidden h-80 md:h-64">
+        <img
+          src="/ep01.jpg"
+          alt="EP01 | Beyond Money & Monuments"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="md:w-2/3 flex flex-col gap-6">
+        <h3 className="text-2xl md:text-3xl font-semibold text-[#1E2E42]">
+          EP01 | Beyond Money & Monuments: What's Your True Mark?
+        </h3>
+        <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
+          In the very first episode of The Legacy Blueprint, we ask a timeless question: beyond wealth and recognition, what truly defines your legacy? This podcast sets the tone for all future episodes on significance, purpose, and intentional impact.
+        </p>
+        <div className="flex gap-4 flex-wrap mt-2">
+          <a href="#" className="bg-[#D4AF37] text-[#000000] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Listen</a>
+          <a href="#" className="bg-[#1E3A8A] text-[#FFFFFF] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Watch</a>
+          <a href="#" className="bg-[#F5F5F5] text-[#000000] px-5 py-3 rounded-md font-semibold hover:opacity-90 transition">Download Reflection Prompts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-12 px-6 text-center max-w-3xl mx-auto bg-white/80 rounded-2xl">
+        <h2 className="text-2xl font-bold text-[#D4AF37] mb-4">Contact Us</h2>
+        <p className="text-lg text-[#333333]">
+          Have questions or want to collaborate? Reach out to us at <span className="text-[#D4AF37]">legacy@podcast.com</span>.
+        </p>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#333333] text-[#f2f2f2] py-6 text-center mt-auto">
+        <p className="text-sm">&copy; {new Date().getFullYear()} The Legacy Podcast. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+}
