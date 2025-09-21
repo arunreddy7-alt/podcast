@@ -1,102 +1,113 @@
-import Image from "next/image";
+"use client";
+import React, { useState } from "react";
 
-export default function Home() {
+export default function PodcastLandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen flex flex-col bg-image-container bg-texture text-[#FFFFFF]">
+      {/* Navbar */}
+      <nav className="bg-transparent fixed top-0 left-0 w-full z-50 shadow-md">
+        <div className="max-w-6xl mx-auto px-6 py-2 flex items-center">
+          {/* Logo */}
+          <img
+            src="/logo.png"
+            alt="The Legacy Blueprint"
+            className="h-20 w-auto text-[#D4AF37] filter brightness-0 invert mr-5"
+           />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          {/* Desktop Links */}
+          <div className="hidden md:flex gap-6 text-[#FFFFFF] ml-auto">
+            <a href="#home" className="hover:text-[#D4AF37] transition">Home</a>
+            <a href="#about" className="hover:text-[#D4AF37] transition">About</a>
+            <a href="#episodes" className="hover:text-[#D4AF37] transition">Episodes</a>
+            <a href="#contact" className="hover:text-[#D4AF37] transition">Contact</a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-[#FFFFFF] focus:outline-none ml-auto"
+            onClick={() => setMenuOpen(!menuOpen)}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-transparent px-6 py-4 flex flex-col gap-4 text-[#FFFFFF]">
+            <a href="#home" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>Home</a>
+            <a href="#about" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>About</a>
+            <a href="#episodes" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>Episodes</a>
+            <a href="#contact" className="hover:text-[#D4AF37]" onClick={() => setMenuOpen(false)}>Contact</a>
+          </div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="min-h-screen flex items-center justify-center px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Build People. Grow Businesses. Leave a Mark.</h1>
+          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-[#F9F9F9] leading-relaxed">
+            Welcome to <span className="text-[#D4AF37] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you're living every single day.
+          </p>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#episodes"
+            className="bg-[#D4AF37] text-[#000000] px-8 py-4 rounded-full font-semibold hover:opacity-90 transition text-lg"
           >
-            Read our docs
+            Listen Now
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-12 px-6 text-center max-w-3xl mx-auto bg-[#FFFFFF]/10 rounded-2xl backdrop-blur-md shadow-md mt-8">
+        <h2 className="text-2xl font-bold text-[#D4AF37] mb-4">About the Podcast</h2>
+        <p className="text-lg leading-relaxed text-[#F9F9F9]">
+          We explore values-based leadership, personal development, mentorship, and how to build a lasting legacy that goes beyond traditional success.  
+          <br /><br />
+          It’s time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
+        </p>
+      </section>
+
+      {/* Episodes Section */}
+      <section id="episodes" className="py-12 px-6 mt-12">
+        <h2 className="text-2xl font-bold text-center text-[#D4AF37] mb-8">Latest Episodes</h2>
+        <div className="grid gap-6 max-w-4xl mx-auto sm:grid-cols-2">
+          {[
+            { title: "Episode 1: Starting Your Legacy", date: "Sep 15, 2025" },
+            { title: "Episode 2: Innovators' Roundtable", date: "Sep 22, 2025" },
+            { title: "Episode 3: The Future of Tech", date: "Sep 29, 2025" },
+            { title: "Episode 4: Mindset for Success", date: "Oct 6, 2025" },
+          ].map((ep, index) => (
+            <div
+              key={index}
+              className="bg-[#FFFFFF] text-[#000000] shadow-lg rounded-2xl p-6 hover:shadow-xl transition"
+            >
+              <h3 className="text-lg font-semibold text-[#1E3A8A] mb-2">{ep.title}</h3>
+              <p className="text-sm text-gray-600 mb-4">{ep.date}</p>
+              <a
+                href="#"
+                className="text-[#D4AF37] font-medium hover:underline"
+              >
+                Listen →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-12 px-6 text-center max-w-3xl mx-auto">
+        <h2 className="text-2xl font-bold text-[#D4AF37] mb-4">Contact Us</h2>
+        <p className="text-lg text-[#F9F9F9]">
+          Have questions or want to collaborate? Reach out to us at <span className="text-[#D4AF37]">legacy@podcast.com</span>.
+        </p>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#000000] text-[#FFFFFF] py-6 text-center mt-auto">
+        <p className="text-sm">&copy; {new Date().getFullYear()} The Legacy Podcast. All rights reserved.</p>
       </footer>
     </div>
   );
