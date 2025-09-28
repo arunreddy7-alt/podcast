@@ -454,10 +454,10 @@ export default function PodcastLandingPage() {
             <a href="https://instagram.com/thelegacyblueprintwithcsk" target="_blank">
               <Image src="/icons/instagram.png" alt="Instagram" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
             </a>
-            <a href="https://facebook.com/thelegacyblueprintwithcsk" target="_blank">
+            <a href="https://www.facebook.com/CSKspeaks/" target="_blank">
               <Image src="/icons/facebook.png" alt="Facebook" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
             </a>
-            <a href="https://linkedin.com/company/thelegacyblueprintwithcsk" target="_blank">
+            <a href="https://www.linkedin.com/company/csk-speaks/" target="_blank">
               <Image src="/icons/linkedin.png" alt="LinkedIn" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
             </a>
             <a href="https://cskspeaks.com/" target="_blank">
