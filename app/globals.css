@@ -63,3 +63,62 @@ body {
     linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%),
     linear-gradient(-45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%);
 }
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Animation Utility Classes */
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-stagger.animate-slideUp > * {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-stagger.animate-slideUp > *:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.animate-stagger.animate-slideUp > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.animate-stagger.animate-slideUp > *:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.video-overlay-fade {
+  transition: opacity 0.3s ease;
+}
