@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function PodcastLandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,12 +72,15 @@ export default function PodcastLandingPage() {
     <div className="min-h-screen flex flex-col bg-[#f2f2f2] text-[#333333] font-poppins">
       {/* Navbar */}
       <nav className={`fixed top-0 left-0 w-full z-50 shadow-md transition-transform duration-300 ${scrolled ? '-translate-y-4 bg-white' : 'bg-transparent'}`}>
-        <div className="max-w-6xl mx-auto px-2 py-2 flex items-center">
+        <div className="max-w-6xl mx-auto px-4 md:px-2 py-2 flex items-center">
           {/* Logo shifted slightly left */}
-          <img
+          <Image
             src="/logo.png"
             alt="The Legacy Blueprint"
-            className={`h-20 w-auto mr-18 -ml-26 transition-filter duration-300 ${scrolled ? 'filter brightness-0 invert-0' : 'filter brightness-0 invert'}`}
+            width={200}
+            height={80}
+            className={`h-16 md:h-20 w-auto mr-4 md:mr-18 -ml-2 md:-ml-26 transition-filter duration-300 ${scrolled ? 'filter brightness-0 invert-0' : 'filter brightness-0 invert'}`}
+            priority
           />
           {/* Desktop Links */}
           <div className={`hidden md:flex gap-12 ml-auto transition-colors duration-300 ${scrolled ? 'text-black' : 'text-[#FFFFFF]'}`}>
@@ -89,7 +93,7 @@ export default function PodcastLandingPage() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white focus:outline-none ml-auto"
+            className={`md:hidden focus:outline-none ml-auto ${scrolled ? 'text-black' : 'text-white'}`}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? "✕" : "☰"}
@@ -98,7 +102,7 @@ export default function PodcastLandingPage() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-transparent px-6 py-4 flex flex-col gap-4 text-white">
+          <div className={`md:hidden px-6 py-4 flex flex-col gap-4 ${scrolled ? 'bg-white text-black' : 'bg-black/60 text-white'}`}>
             <a href="#home" className="hover:text-white" onClick={() => setMenuOpen(false)}>Home</a>
             <a href="#about" className="hover:text-white" onClick={() => setMenuOpen(false)}>About</a>
             <a href="#episodes" className="hover:text-white" onClick={() => setMenuOpen(false)}>Episodes</a>
@@ -122,8 +126,8 @@ export default function PodcastLandingPage() {
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         {/* Content */}
-        <div className="max-w-4xl mx-auto mt-20 md:mt-28 lg:mt-40">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-24 leading-tight whitespace-nowrap inline-block -ml-10 md:-ml-58 font-poppins text-[#FFFFFF] text-center">
+        <div className="max-w-4xl md:max-w-none mx-auto mt-24 md:mt-28 lg:mt-40 px-2">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-10 md:mb-24 leading-tight font-poppins text-[#FFFFFF] text-center md:inline-block md:whitespace-nowrap">
             Build People. Grow Businesses. Leave a Mark.
           </h1>
         </div>
@@ -134,9 +138,9 @@ export default function PodcastLandingPage() {
   id="about"
   className="py-16 px-8 text-center max-w-5xl mx-auto rounded-xl backdrop-blur-sm mt-12"
 >
-  <h2 className="text-4xl md:text-5xl font-bold text-[#1E2E42] mb-6 font-poppins">About us</h2>
-  <p className="text-lg md:text-xl text-black leading-relaxed mb-8">
-    Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you're living every single day.
+  <h2 className="text-3xl md:text-5xl font-bold text-[#1E2E42] mb-4 md:mb-6 font-poppins">About us</h2>
+  <p className="text-base md:text-xl text-black leading-relaxed mb-6 md:mb-8">
+    Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you&apos;re living every single day.
   </p>
 
   {/* Video Container */}
@@ -194,9 +198,9 @@ export default function PodcastLandingPage() {
     </div>
   </div>
 
-  <p className="text-lg md:text-xl text-black leading-relaxed">
+  <p className="text-base md:text-xl text-black leading-relaxed">
     We explore values-based leadership, personal development, mentorship, and how to build a lasting legacy that goes beyond traditional success.
-    It's time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
+    It&apos;s time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
   </p>
 </section>
 
@@ -209,7 +213,7 @@ export default function PodcastLandingPage() {
   <div className="absolute -top-20 -left-32 w-96 h-96 bg-[#D4AF37]/10 rounded-full filter blur-3xl"></div>
   <div className="absolute -bottom-32 -right-24 w-96 h-96 bg-[#1E3A8A]/10 rounded-full filter blur-3xl"></div>
 
-  <h2 className="relative text-5xl md:text-6xl font-bold text-center text-[#1E2E42] mb-20 font-poppins z-10">
+  <h2 className="relative text-4xl md:text-6xl font-bold text-center text-[#1E2E42] mb-10 md:mb-20 font-poppins z-10">
     Latest Episodes
   </h2>
 
@@ -279,7 +283,7 @@ export default function PodcastLandingPage() {
       </div>
       <div className="md:w-1/2 flex flex-col gap-6">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
-          EP01 | Beyond Money & Monuments: What's Your True Mark?
+          EP01 | Beyond Money & Monuments: What&apos;s Your True Mark?
         </h3>
         <a href="https://youtu.be/jTqLnlQO9Ro?si=1SG80K-BQVbKfBj-" target="_blank" className="text-[#1E2E42] hover:underline font-semibold">
           Watch Trailer
@@ -311,7 +315,7 @@ export default function PodcastLandingPage() {
       Have questions or want to collaborate? Reach out to us
       <span className="text-[#B69951] font-semibold"></span>
     </p>
-    <div className="flex gap-4 w-full">
+    <div className="flex flex-col sm:flex-row gap-4 w-full">
       <button
         onClick={() => {
           setModalType('contact');
@@ -346,11 +350,13 @@ export default function PodcastLandingPage() {
   <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-16">
 
     {/* Left Side: Logo & Channel Links */}
-    <div className="flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[40px]">
+    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[40px]">
       {/* Podcast Logo */}
-      <img
+      <Image
         src="/logo1.png"
         alt="The Legacy Blueprint"
+        width={200}
+        height={100}
         className="h-100 w-auto"
       />
 
@@ -358,22 +364,22 @@ export default function PodcastLandingPage() {
       <h3 className="text-2xl font-bold text-[#1E2E42] mb-4 self-center">Follow Us</h3>
       <div className="flex gap-8 mt-2 justify-center">
         <a href="https://youtube.com/@thelegacyblueprintwithcsk?si=xCVmd4C23WFBL06W" target="_blank">
-          <img src="/icons/youtube.png" alt="YouTube" className="h-14 w-14 hover:scale-110 transition-transform" />
+          <Image src="/icons/youtube.png" alt="YouTube" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
         </a>
         <a href="https://open.spotify.com/show/7BXnKMsNxJXgtq3SyKxSFj?si=90172b1285e34a17" target="_blank">
-          <img src="/icons/spotify.png" alt="Spotify" className="h-14 w-14 hover:scale-110 transition-transform" />
+          <Image src="/icons/spotify.png" alt="Spotify" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
         </a>
         <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700" target="_blank">
-          <img src="/icons/apple-podcast.png" alt="Apple Podcast" className="h-14 w-14 hover:scale-110 transition-transform" />
+          <Image src="/icons/apple-podcast.png" alt="Apple Podcast" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
         </a>
         <a href="https://www.instagram.com/the.legacy.blueprint.with.csk?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-          <img src="/icons/instagram.png" alt="Instagram" className="h-14 w-14 hover:scale-110 transition-transform" />
+          <Image src="/icons/instagram.png" alt="Instagram" width={56} height={56} className="h-14 w-14 hover:scale-110 transition-transform" />
         </a>
       </div>
     </div>
 
     {/* Right Side: Collaboration Form */}
-    <section className="flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-10 shadow-lg w-full max-w-lg">
+    <section className="order-1 lg:order-2 flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-lg w-full max-w-lg">
       <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left">Collaborate With Us</h3>
       <form className="flex flex-col gap-4">
         <input
