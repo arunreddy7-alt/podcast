@@ -29,7 +29,7 @@ export default function PodcastLandingPage() {
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -138,7 +138,7 @@ export default function PodcastLandingPage() {
   <p className="text-lg md:text-xl text-black leading-relaxed mb-8">
     Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you're living every single day.
   </p>
-  
+
   {/* Video Container */}
   <div className="relative w-full max-w-4xl mx-auto mb-8">
     <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
@@ -170,12 +170,9 @@ export default function PodcastLandingPage() {
         <div
           className="absolute inset-0 flex items-center justify-center cursor-pointer"
           onClick={() => {
-            console.log('Video clicked');
             if (videoRef.current) {
-              console.log('Video ref exists, paused:', videoRef.current.paused, 'readyState:', videoRef.current.readyState);
               if (videoRef.current.paused) {
                 videoRef.current.play().then(() => {
-                  console.log('Video started playing');
                   setIsPlaying(true);
                 }).catch(error => {
                   console.error('Error playing video:', error);
@@ -183,10 +180,7 @@ export default function PodcastLandingPage() {
               } else {
                 videoRef.current.pause();
                 setIsPlaying(false);
-                console.log('Video paused');
               }
-            } else {
-              console.log('Video ref is null');
             }
           }}
         >
@@ -199,7 +193,7 @@ export default function PodcastLandingPage() {
       )}
     </div>
   </div>
-  
+
   <p className="text-lg md:text-xl text-black leading-relaxed">
     We explore values-based leadership, personal development, mentorship, and how to build a lasting legacy that goes beyond traditional success.
     It's time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
@@ -318,7 +312,7 @@ export default function PodcastLandingPage() {
       <span className="text-[#B69951] font-semibold"></span>
     </p>
     <div className="flex gap-4 w-full">
-      <button 
+      <button
         onClick={() => {
           setModalType('contact');
           setShowModal(true);
@@ -327,7 +321,7 @@ export default function PodcastLandingPage() {
       >
         Contact Us
       </button>
-      <button 
+      <button
         onClick={() => {
           setModalType('collaborate');
           setShowModal(true);
@@ -350,7 +344,7 @@ export default function PodcastLandingPage() {
 
   {/* Content Container */}
   <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-16">
-    
+
     {/* Left Side: Logo & Channel Links */}
     <div className="flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[40px]">
       {/* Podcast Logo */}
@@ -379,7 +373,7 @@ export default function PodcastLandingPage() {
     </div>
 
     {/* Right Side: Collaboration Form */}
-    <section id="collaborate" className="flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-10 shadow-lg w-full max-w-lg">
+    <section className="flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-10 shadow-lg w-full max-w-lg">
       <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left">Collaborate With Us</h3>
       <form className="flex flex-col gap-4">
         <input
@@ -415,11 +409,11 @@ export default function PodcastLandingPage() {
   {showModal && (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Blurred Background */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={() => setShowModal(false)}
       ></div>
-      
+
       {/* Modal Content */}
       <div className="relative bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
         <button
@@ -428,11 +422,11 @@ export default function PodcastLandingPage() {
         >
           ×
         </button>
-        
+
         <h3 className="text-2xl font-bold text-[#1E2E42] mb-6 text-center">
           {modalType === 'contact' ? 'Contact Us' : 'Collaborate With Us'}
         </h3>
-        
+
         <form className="space-y-4">
           <input
             type="text"
