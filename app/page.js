@@ -163,9 +163,9 @@ export default function PodcastLandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         {/* Content */}
         <div className="max-w-4xl md:max-w-none mx-auto mt-24 md:mt-28 lg:mt-40 px-2">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-10 md:mb-24 leading-tight font-poppins text-[#FFFFFF] text-center md:inline-block md:whitespace-nowrap animate-slideUp">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-10 md:mb-24 leading-tight font-poppins text-[#FFFFFF] text-center md:inline-block md:whitespace-nowrap animate-slideUp animate-glow">
             Build People. Grow Businesses. Leave a Mark.
-          </h1>
+            </h1>
         </div>
       </section>
 
@@ -429,14 +429,14 @@ export default function PodcastLandingPage() {
   <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-16">
 
     {/* Left Side: Logo & Channel Links */}
-    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:-translate-y-[0px]">
+    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[30px]">
       {/* Podcast Logo */}
       <Image
         src="/logo1.png"
         alt="The Legacy Blueprint"
         width={200}
         height={100}
-        className="h-100 w-auto"
+        className="h-100 w-auto lg:-translate-y-[90px]"
       />
 
       {/* Channel Links */}
@@ -516,7 +516,7 @@ export default function PodcastLandingPage() {
       </form>
     </section>
   </div>
-      <div className="mt-11 md:-mt-18 md:ml-170 text-center text-lg text-[#1E2E42]">
+      <div className="mt-11 md:-mt-19 md:ml-195 text-center text-lg text-[#1E2E42]">
         <p className="mb-1 font-bold">Email: csk@cskspeaks.com</p>
         <p className="mb-1 font-bold">Phone: +91 9949488181</p>
       </div>
