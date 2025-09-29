@@ -1,9 +1,7 @@
-the # TODO: Add Animations to Complete Page
+# Task: Add Email and Phone Below Form and Beside "Follow Us"
 
-- [x] Update app/globals.css: Add @keyframes for fadeIn, slideUp, pulseSlow, staggerDelay; define utility classes like .animate-fadeIn, .animate-slideUp, .animate-stagger, .video-overlay-fade; enhance .bg-image-container with animate-pulse.
-- [x] Update app/page.js: Add IntersectionObserver for scroll-triggered animations; apply fade-in to Hero h1; slide-up to About video, Episodes cards (staggered), Contact section, Footer elements; enhance hovers (images, modal); fade video overlay on play; import useCallback.
-- [ ] Test: Run dev server, verify animations on scroll/load, check responsiveness and video integration.
-
-# TODO: Add Spacing Between Episodes
-
-- [x] Increase spacing between episodes in app/page.js by changing gap-64 to gap-96 for better visual separation.
+## Steps:
+- [ ] Edit app/page.js: Add div with email and phone details after the collaboration form's </form> tag, before the closing </section>. Use Tailwind classes for styling (mt-6, text-center, text-sm, text-[#1E2E42]).
+- [ ] Confirm edit success from user response.
+- [ ] Update TODO.md to mark steps as complete.
+- [ ] Attempt task completion.
