@@ -1,7 +1,8 @@
-# Task: Add Email and Phone Below Form and Beside "Follow Us"
-
-## Steps:
-- [ ] Edit app/page.js: Add div with email and phone details after the collaboration form's </form> tag, before the closing </section>. Use Tailwind classes for styling (mt-6, text-center, text-sm, text-[#1E2E42]).
-- [ ] Confirm edit success from user response.
-- [ ] Update TODO.md to mark steps as complete.
-- [ ] Attempt task completion.
+- [ ] Add opacity-0 class to Hero section
+- [ ] Add opacity-0 class to About section
+- [ ] Add opacity-0 class to Episodes section
+- [ ] Add opacity-0 class to Contact section
+- [ ] Add opacity-0 class to Footer section
+- [ ] Update IntersectionObserver to observe heroRef and episodesRef
+- [ ] Change 'animate-slideUp' to 'animate-fadeIn' in observer callback for consistency
+- [ ] Test the fade-in animations by scrolling through the page

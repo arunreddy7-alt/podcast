@@ -100,7 +100,9 @@ export default function PodcastLandingPage() {
       });
     }, observerOptions);
 
+    if (heroRef.current) observer.observe(heroRef.current);
     if (aboutRef.current) observer.observe(aboutRef.current);
+    if (episodesRef.current) observer.observe(episodesRef.current);
     const episodes = document.querySelectorAll('.episode');
     episodes.forEach(episode => observer.observe(episode));
     if (contactRef.current) observer.observe(contactRef.current);
@@ -178,7 +180,8 @@ export default function PodcastLandingPage() {
       {/* Hero Section */}
       <section
         id="home"
-        className="min-h-screen flex items-center justify-center px-6 text-center relative"
+        ref={heroRef}
+        className="min-h-screen flex items-center justify-center px-6 text-center relative animate-fadeIn"
         style={{
           backgroundImage: "url('/bg1.jpg')",
           backgroundSize: "cover",
@@ -210,7 +213,7 @@ export default function PodcastLandingPage() {
       height={120}
       className="rounded-full -ml-8 md:-ml-35 w-12 h-12 md:w-30 md:h-30"
     />
-    <h2 className="text-3xl md:text-5xl font-bold text-[#1E2E42] font-poppins -ml-4 md:ml-0">About us</h2>
+    <h2 className="text-3xl md:text-5xl font-bold text-[#1E2E42] font-poppins -ml-4 md:ml-0 animate-fadeIn">About us</h2>
   </div>
   <p className="text-base md:text-xl text-black leading-relaxed mb-6 md:mb-8">
     Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you&apos;re living every single day.
@@ -289,7 +292,7 @@ export default function PodcastLandingPage() {
   <div className="absolute -top-20 -left-32 w-96 h-96 bg-[#D4AF37]/10 rounded-full filter blur-3xl"></div>
   <div className="absolute -bottom-32 -right-24 w-96 h-96 bg-[#1E3A8A]/10 rounded-full filter blur-3xl"></div>
 
-  <h2 className="relative text-4xl md:text-6xl font-bold text-center text-[#1E2E42] mb-10 md:mb-20 font-poppins z-10">
+  <h2 className="relative text-4xl md:text-6xl font-bold text-center text-[#1E2E42] mb-10 md:mb-20 font-poppins z-10 animate-fadeIn">
     Latest Episodes
   </h2>
 
@@ -405,7 +408,7 @@ export default function PodcastLandingPage() {
 </div>
       <div className="text-center lg:text-left flex-1 max-w-2xl">
         <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
-          <h2 className="text-4xl md:text-6xl font-bold text-[#1E2E42] font-poppins whitespace-nowrap">
+          <h2 className="text-4xl md:text-6xl font-bold text-[#1E2E42] font-poppins whitespace-nowrap animate-fadeIn">
           Let&apos;s Connect!
           </h2>
           <Image
@@ -507,7 +510,7 @@ export default function PodcastLandingPage() {
 
     {/* Right Side: Collaboration Form */}
     <section className="order-1 lg:order-2 flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-lg w-full max-w-lg lg:-translate-y-[100px]">
-      <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left">Feature in the Podcast</h3>
+      <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left animate-fadeIn">Feature in the Podcast</h3>
       <form className="flex flex-col gap-4">
         <input
           type="text"
