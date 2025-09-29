@@ -94,14 +94,14 @@ export default function PodcastLandingPage() {
 
   // Initialize EmailJS
   useEffect(() => {
-    emailjs.init("fxIq3mEsIuoKM-0nb");
+    emailjs.init("L3S76D8JAJMIEGFzp");
   }, []);
 
   // Footer form submit handler
   const handleFooterSubmit = async (e) => {
     e.preventDefault();
     try {
-      await emailjs.send('service_t5vn6pc', 'template_l72jgyw', {
+      await emailjs.send('service_tkv11ra', 'template_ibegqup', {
         name: footerName,
         email: footerEmail,
         phone: footerPhone,
@@ -130,7 +130,7 @@ export default function PodcastLandingPage() {
       if (modalType === 'collaborate') {
         templateParams.modalTentativeDate = modalTentativeDate;
       }
-      await emailjs.send('service_t5vn6pc', 'template_l72jgyw', templateParams);
+      await emailjs.send('service_tkv11ra', 'template_ibegqup', templateParams);
       alert('Message sent successfully!');
       setModalName('');
       setModalEmail('');

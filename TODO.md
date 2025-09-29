@@ -5,3 +5,4 @@
 - [x] Add onSubmit handler for modal form
 - [x] Make form inputs controlled with state
 - [x] Handle success/error responses
+- [x] Replace modal form EmailJS keys with provided service and template keys
