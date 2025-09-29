@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 :root {
@@ -73,9 +74,14 @@ body {
     opacity: 1;
   }
 }
-
-
-
+@keyframes slideUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes slideDown {
   from {
     opacity: 0;

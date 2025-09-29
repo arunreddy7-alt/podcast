@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
@@ -21,7 +22,7 @@ export default function PodcastLandingPage() {
   const ep01ImageRef = useRef(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -111,8 +112,8 @@ export default function PodcastLandingPage() {
   }, []);
 
   const LoadingComponent = () => (
-    <div className="fixed inset-0 bg-gradient-to-b from-[#1E3A8A] to-[#f2f2f2] flex flex-col items-center justify-center z-50 text-white">
-      <div className="animate-slideUp mb-4">
+    <div className="fixed inset-0 bg-gradient-to-b from-[#ADD8E6] to-[#ffffff] flex flex-col items-center justify-center z-50 text-black">
+      <div className="animate-slideDown mb-4">
         <Image
           src="/logo1.png"
           alt="The Legacy Blueprint"
