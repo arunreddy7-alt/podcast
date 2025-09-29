@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import ScrollAnimator from "../components/ScrollAnimator.js";
 import Image from "next/image";
+import emailjs from '@emailjs/browser';
 
 export default function PodcastLandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -13,6 +14,19 @@ export default function PodcastLandingPage() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
   const videoRef = useRef(null);
+
+  // EmailJS form states for footer form
+  const [footerName, setFooterName] = useState('');
+  const [footerEmail, setFooterEmail] = useState('');
+  const [footerPhone, setFooterPhone] = useState('');
+  const [footerMessage, setFooterMessage] = useState('');
+
+  // EmailJS form states for modal form
+  const [modalName, setModalName] = useState('');
+  const [modalEmail, setModalEmail] = useState('');
+  const [modalPhone, setModalPhone] = useState('');
+  const [modalTentativeDate, setModalTentativeDate] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
 
   // Loading overlay: hide after 3 seconds
   useEffect(() => {
@@ -77,6 +91,57 @@ export default function PodcastLandingPage() {
       });
     };
   }, []);
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("fxIq3mEsIuoKM-0nb");
+  }, []);
+
+  // Footer form submit handler
+  const handleFooterSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await emailjs.send('service_t5vn6pc', 'template_l72jgyw', {
+        name: footerName,
+        email: footerEmail,
+        phone: footerPhone,
+        message: footerMessage,
+      });
+      alert('Message sent successfully!');
+      setFooterName('');
+      setFooterEmail('');
+      setFooterPhone('');
+      setFooterMessage('');
+    } catch (error) {
+      alert('Failed to send message. Please try again.');
+    }
+  };
+
+  // Modal form submit handler
+  const handleModalSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const templateParams = {
+        name: modalName,
+        email: modalEmail,
+        phone: modalPhone,
+        Message: modalMessage,
+      };
+      if (modalType === 'collaborate') {
+        templateParams.modalTentativeDate = modalTentativeDate;
+      }
+      await emailjs.send('service_t5vn6pc', 'template_l72jgyw', templateParams);
+      alert('Message sent successfully!');
+      setModalName('');
+      setModalEmail('');
+      setModalPhone('');
+      setModalTentativeDate('');
+      setModalMessage('');
+      setShowModal(false);
+    } catch (error) {
+      alert('Failed to send message. Please try again.');
+    }
+  };
 
   // Removed all scroll-based animations and observers
 
@@ -420,19 +485,19 @@ export default function PodcastLandingPage() {
   <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-16">
 
     {/* Left Side: Logo & Channel Links */}
-    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[30px]" data-anim="fade">
+    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[30px] -translate-y-4 md:-translate-y-0" data-anim="fade">
       {/* Podcast Logo */}
       <Image
         src="/logo1.png"
         alt="The Legacy Blueprint"
         width={200}
         height={100}
-        className="h-100 w-auto lg:-translate-y-[90px]"
+        className="h-100 w-auto -translate-y-22 lg:-translate-y-[90px]"
       />
 
       {/* Channel Links */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:translate-x-[-50px]" data-anim="slide-up" data-anim-delay="100">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center -translate-y-10 md:translate-y-0">
           <h3 className="text-xl font-bold text-[#1E2E42] mb-3">Listen on</h3>
           <div className="flex gap-8 mt-2 justify-center">
             <a href="https://youtube.com/@thelegacyblueprintwithcsk?si=xCVmd4C23WFBL06W" target="_blank">
@@ -446,7 +511,7 @@ export default function PodcastLandingPage() {
             </a>
           </div>
         </div>
-        <div className="flex flex-col items-center lg:translate-x-[80px]" data-anim="slide-up" data-anim-delay="150">
+        <div className="flex flex-col items-center lg:translate-x-[80px] -translate-y-10 md:translate-y-0" data-anim="slide-up" data-anim-delay="150">
           <h3 className="text-xl font-bold text-[#1E2E42] mb-3">Follow us</h3>
           <div className="flex gap-8 mt-2 justify-center flex-wrap">
             <a href="https://www.facebook.com/CSKspeaks/" target="_blank">
@@ -470,30 +535,38 @@ export default function PodcastLandingPage() {
     </div>
 
     {/* Right Side: Collaboration Form */}
-    <section className="order-1 lg:order-2 flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-lg w-full max-w-lg lg:-translate-y-[100px]" data-anim="slide-left">
+    <section className="order-1 lg:order-2 flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-lg w-full max-w-lg -translate-y-17 lg:-translate-y-[100px]" data-anim="slide-left">
       <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left">Feature in the Podcast</h3>
-      <form className="flex flex-col gap-4">
+      <form onSubmit={handleFooterSubmit} className="flex flex-col gap-4">
         <input
           type="text"
           placeholder="Your Name"
           required
+          value={footerName}
+          onChange={(e) => setFooterName(e.target.value)}
           className="px-4 py-3 rounded-md text-[#1E2E42] focus:outline-none"
         />
         <input
           type="email"
           placeholder="Your Email"
           required
+          value={footerEmail}
+          onChange={(e) => setFooterEmail(e.target.value)}
           className="px-4 py-3 rounded-md text-[#1E2E42] focus:outline-none"
         />
         <input
             type="tel"
             placeholder="Your Phone Number"
             required
+            value={footerPhone}
+            onChange={(e) => setFooterPhone(e.target.value)}
             className="w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
           />
         <textarea
           placeholder="Message / Collaboration Idea"
           required
+          value={footerMessage}
+          onChange={(e) => setFooterMessage(e.target.value)}
           className="px-4 py-3 rounded-md text-[#1E2E42] focus:outline-none"
           rows={5}
         />
@@ -503,11 +576,11 @@ export default function PodcastLandingPage() {
         >
           Send
         </button>
-        
+
       </form>
     </section>
   </div>
-      <div className="mt-11 md:-mt-19 md:ml-195 text-center text-lg text-[#1E2E42]" data-anim="fade">
+      <div className="mt-11 md:-mt-19 md:ml-195 text-center text-lg text-[#1E2E42] -translate-y-10 md:translate-y-0" data-anim="fade">
         <p className="mb-1 font-bold">Email: csk@cskspeaks.com</p>
         <p className="mb-1 font-bold">Phone: +91 9949488181</p>
       </div>
@@ -537,23 +610,29 @@ export default function PodcastLandingPage() {
           {modalType === 'contact' ? 'Subscribe to Newsletter' : 'Feature in the Podcast'}
         </h3>
 
-        <form className="space-y-4">
+        <form onSubmit={handleModalSubmit} className="space-y-4">
           <input
             type="text"
             placeholder="Your Name"
             required
+            value={modalName}
+            onChange={(e) => setModalName(e.target.value)}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
           />
           <input
             type="email"
             placeholder="Your Email"
             required
+            value={modalEmail}
+            onChange={(e) => setModalEmail(e.target.value)}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
           />
           <input
             type="tel"
             placeholder="Your Phone Number"
             required
+            value={modalPhone}
+            onChange={(e) => setModalPhone(e.target.value)}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
           />
           {modalType === 'collaborate' && (
@@ -562,6 +641,8 @@ export default function PodcastLandingPage() {
                 type="text"
                 placeholder="Tentative Date & Location"
                 required
+                value={modalTentativeDate}
+                onChange={(e) => setModalTentativeDate(e.target.value)}
                 className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
               />
             </>
@@ -569,6 +650,8 @@ export default function PodcastLandingPage() {
           <textarea
             placeholder={modalType === 'contact' ? 'Your Message' : 'Collaboration Idea'}
             required
+            value={modalMessage}
+            onChange={(e) => setModalMessage(e.target.value)}
             rows={4}
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#B69951]"
           />
