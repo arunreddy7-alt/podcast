@@ -22,7 +22,7 @@ export default function PodcastLandingPage() {
   const ep01ImageRef = useRef(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
