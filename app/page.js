@@ -7,6 +7,7 @@ export default function PodcastLandingPage() {
   const [scrolled, setScrolled] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [loading, setLoading] = useState(true);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
@@ -18,6 +19,11 @@ export default function PodcastLandingPage() {
   const footerRef = useRef(null);
   const videoContainerRef = useRef(null);
   const ep01ImageRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,6 +109,26 @@ export default function PodcastLandingPage() {
 
     return () => observer.disconnect();
   }, []);
+
+  const LoadingComponent = () => (
+    <div className="fixed inset-0 bg-gradient-to-b from-[#1E3A8A] to-[#f2f2f2] flex flex-col items-center justify-center z-50 text-white">
+      <div className="animate-slideUp mb-4">
+        <Image
+          src="/logo1.png"
+          alt="The Legacy Blueprint"
+          width={600}
+          height={600}
+          className="w-auto h-150"
+        />
+      </div>
+      <h1 className="text-2xl font-bold animate-slideUp text-center">
+      </h1>
+    </div>
+  );
+
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f2f2f2] text-[#333333] font-poppins">
