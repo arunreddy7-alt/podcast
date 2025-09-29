@@ -1,6 +1,7 @@
 
 "use client";
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import ScrollAnimator from "../components/ScrollAnimator.js";
 import Image from "next/image";
 
 export default function PodcastLandingPage() {
@@ -9,21 +10,27 @@ export default function PodcastLandingPage() {
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const [loading, setLoading] = useState(true);
-  const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(true);
-  const heroRef = useRef(null);
-  const aboutRef = useRef(null);
-  const aboutH2Ref = useRef(null);
-  const episodesRef = useRef(null);
-  const contactRef = useRef(null);
-  const footerRef = useRef(null);
-  const videoContainerRef = useRef(null);
-  const ep01ImageRef = useRef(null);
+  const videoRef = useRef(null);
 
+  // Loading overlay: hide when window is ready or after a short delay
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1500);
-    return () => clearTimeout(timer);
+    const onReady = () => setLoading(false);
+    if (typeof window !== 'undefined') {
+      if (document.readyState === 'complete') {
+        setLoading(false);
+      } else {
+        window.addEventListener('load', onReady);
+      }
+    }
+    const safety = setTimeout(() => setLoading(false), 1500);
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('load', onReady);
+      }
+      clearTimeout(safety);
+    };
   }, []);
 
   useEffect(() => {
@@ -84,57 +91,25 @@ export default function PodcastLandingPage() {
     };
   }, []);
 
-  useEffect(() => {
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          if (entry.target === ep01ImageRef.current) {
-            entry.target.classList.add('animate-fadeInFromLeft');
-          } else if (entry.target === videoContainerRef.current) {
-            entry.target.classList.add('animate-fadeInFromRight');
-          } else {
-            entry.target.classList.add('animate-slideUp');
-          }
-        }
-      });
-    }, observerOptions);
+  // Removed all scroll-based animations and observers
 
-    if (heroRef.current) observer.observe(heroRef.current);
-    if (aboutRef.current) observer.observe(aboutRef.current);
-    if (episodesRef.current) observer.observe(episodesRef.current);
-    const episodes = document.querySelectorAll('.episode');
-    episodes.forEach(episode => observer.observe(episode));
-    if (contactRef.current) observer.observe(contactRef.current);
-    if (footerRef.current) observer.observe(footerRef.current);
-    if (videoContainerRef.current) observer.observe(videoContainerRef.current);
-    if (ep01ImageRef.current) observer.observe(ep01ImageRef.current);
-
-    return () => observer.disconnect();
-  }, []);
-
-  const LoadingComponent = () => (
-    <div className="fixed inset-0 bg-gradient-to-b from-[#ADD8E6] to-[#ffffff] flex flex-col items-center justify-center z-50 text-black">
-      <div className="animate-slideDown mb-4">
-        <Image
-          src="/logo1.png"
-          alt="The Legacy Blueprint"
-          width={600}
-          height={600}
-          className="w-auto h-150"
-        />
-      </div>
-      <h1 className="text-2xl font-bold animate-slideUp text-center">
-      </h1>
-    </div>
-  );
-
-  if (loading) {
-    return <LoadingComponent />;
-  }
+  // Removed LoadingComponent and conditional render
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f2f2f2] text-[#333333] font-poppins">
+      {loading && (
+        <div className="fixed inset-0 bg-gradient-to-b from-[#ADD8E6] to-[#ffffff] flex items-center justify-center z-50">
+          <Image
+            src="/logo1.png"
+            alt="The Legacy Blueprint"
+            width={560}
+            height={560}
+            className="w-auto h-80"
+            priority
+          />
+        </div>
+      )}
+      <ScrollAnimator />
       {/* Navbar */}
       <nav className={`fixed top-0 left-0 w-full z-50 shadow-md transition-all duration-300 ${scrolled ? '-translate-y-4 bg-white shadow-lg' : 'bg-transparent'}`}>
         <div className="max-w-6xl mx-auto px-4 md:px-2 py-2 flex items-center">
@@ -180,8 +155,7 @@ export default function PodcastLandingPage() {
       {/* Hero Section */}
       <section
         id="home"
-        ref={heroRef}
-        className="min-h-screen flex items-center justify-center px-6 text-center relative animate-fadeIn"
+        className="min-h-screen flex items-center justify-center px-6 text-center relative"
         style={{
           backgroundImage: "url('/bg1.jpg')",
           backgroundSize: "cover",
@@ -193,34 +167,35 @@ export default function PodcastLandingPage() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         {/* Content */}
         <div className="max-w-4xl md:max-w-none mx-auto mt-24 md:mt-28 lg:mt-40 px-2">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-10 md:mb-24 leading-tight font-poppins text-[#FFFFFF] text-center md:inline-block md:whitespace-nowrap animate-slideUp animate-glow">
+          <h1 data-anim="slide-up" className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-10 md:mb-24 leading-tight font-poppins text-[#FFFFFF] text-center md:inline-block md:whitespace-nowrap">
             Build People. Grow Businesses. Leave a Mark.
             </h1>
         </div>
       </section>
 
       {/* About Section */}
-<section
+      <section
   id="about"
-  ref={aboutRef}
   className="py-16 px-8 text-center max-w-5xl mx-auto rounded-xl backdrop-blur-sm mt-12"
 >
   <div className="flex items-center justify-center gap-4 mb-4 md:mb-6">
-    <Image
-      src="/9915506-removebg-preview.png"
-      alt="About Us Image"
-      width={120}
-      height={120}
-      className="rounded-full -ml-8 md:-ml-35 w-12 h-12 md:w-30 md:h-30"
-    />
-    <h2 className="text-3xl md:text-5xl font-bold text-[#1E2E42] font-poppins -ml-4 md:ml-0 animate-fadeIn">About us</h2>
+    <div data-anim="slide-right">
+      <Image
+        src="/9915506-removebg-preview.png"
+        alt="About Us Image"
+        width={120}
+        height={120}
+        className="rounded-full -ml-8 md:-ml-35 w-12 h-12 md:w-30 md:h-30"
+      />
+    </div>
+    <h2 data-anim="fade" className="text-3xl md:text-5xl font-bold text-[#1E2E42] font-poppins -ml-4 md:ml-0">About us</h2>
   </div>
-  <p className="text-base md:text-xl text-black leading-relaxed mb-6 md:mb-8">
+  <p data-anim="fade" data-anim-delay="100" className="text-base md:text-xl text-black leading-relaxed mb-6 md:mb-8">
     Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you&apos;re living every single day.
   </p>
 
   {/* Video Container */}
-  <div ref={videoContainerRef} className="relative w-full max-w-4xl mx-auto mb-8">
+  <div data-anim="slide-left" className="relative w-full max-w-4xl mx-auto mb-8">
     <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl">
       <video
         ref={videoRef}
@@ -276,7 +251,7 @@ export default function PodcastLandingPage() {
     </div>
   </div>
 
-  <p className="text-base md:text-xl text-black leading-relaxed">
+  <p data-anim="fade" data-anim-delay="150" className="text-base md:text-xl text-black leading-relaxed">
     We explore values-based leadership, personal development, mentorship, and how to build a lasting legacy that goes beyond traditional success.
     It&apos;s time to lead with intention, grow with purpose, and leave your mark on people, not just paper.
   </p>
@@ -285,14 +260,13 @@ export default function PodcastLandingPage() {
 {/* Episodes Section */}
 <section
   id="episodes"
-  ref={episodesRef}
   className="relative py-28 px-6 bg-gradient-to-b from-[#1E3A8A]/10 to-[#F9F9F9] overflow-hidden"
 >
   {/* Subtle abstract shapes */}
   <div className="absolute -top-20 -left-32 w-96 h-96 bg-[#D4AF37]/10 rounded-full filter blur-3xl"></div>
   <div className="absolute -bottom-32 -right-24 w-96 h-96 bg-[#1E3A8A]/10 rounded-full filter blur-3xl"></div>
 
-  <h2 className="relative text-4xl md:text-6xl font-bold text-center text-[#1E2E42] mb-10 md:mb-20 font-poppins z-10 animate-fadeIn">
+  <h2 data-anim="fade" className="relative text-4xl md:text-6xl font-bold text-center text-[#1E2E42] mb-10 md:mb-20 font-poppins z-10">
     Latest Episodes
   </h2>
 
@@ -300,7 +274,7 @@ export default function PodcastLandingPage() {
     <div className="flex flex-col gap-25">
       {/* Episode 3 - Image Left */}
       <div className="episode flex flex-col md:flex-row items-center gap-16 md:gap-20">
-      <div className="md:w-1/2">
+      <div className="md:w-1/2" data-anim="slide-left">
         <Image
           src="/ep03.jpg"
           alt="EP03 | Design Your Destiny"
@@ -309,7 +283,7 @@ export default function PodcastLandingPage() {
           className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-xl"
         />
       </div>
-      <div className="md:w-1/2 flex flex-col gap-6">
+      <div className="md:w-1/2 flex flex-col gap-6" data-anim="fade" data-anim-delay="100">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP03 | Design Your Destiny: Reverse-Engineering Your Legacy Vision
         </h3>
@@ -329,7 +303,7 @@ export default function PodcastLandingPage() {
 
     {/* Episode 2 - Image Right */}
     <div className="episode flex flex-col md:flex-row-reverse items-center gap-24 md:gap-32">
-      <div className="md:w-1/2">
+      <div className="md:w-1/2" data-anim="slide-right">
         <Image
           src="/ep02.jpg"
           alt="EP02 | Unpacking the 3 Pillars"
@@ -338,7 +312,7 @@ export default function PodcastLandingPage() {
           className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-xl"
         />
       </div>
-      <div className="md:w-1/2 flex flex-col gap-6 -mt-5 md:mt-0">
+      <div className="md:w-1/2 flex flex-col gap-6 -mt-5 md:mt-0" data-anim="fade" data-anim-delay="100">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP02 | Unpacking the 3 Pillars of a Powerful Legacy
         </h3>
@@ -358,7 +332,7 @@ export default function PodcastLandingPage() {
 
     {/* Episode 1 - Image Left */}
     <div className="episode flex flex-col md:flex-row items-center gap-12 md:gap-16">
-      <div className="md:w-1/2" ref={ep01ImageRef}>
+      <div className="md:w-1/2" data-anim="slide-left">
         <Image
           src="/ep01.jpg"
           alt="EP01 | Beyond Money & Monuments"
@@ -367,7 +341,7 @@ export default function PodcastLandingPage() {
           className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-xl"
         />
       </div>
-      <div className="md:w-1/2 flex flex-col gap-6">
+      <div className="md:w-1/2 flex flex-col gap-6" data-anim="fade" data-anim-delay="100">
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP01 | Beyond Money & Monuments: What&apos;s Your True Mark?
         </h3>
@@ -392,11 +366,10 @@ export default function PodcastLandingPage() {
 {/* Contact Section */}
 <section
   id="contact"
-  ref={contactRef}
   className="relative py-24 px-6 overflow-hidden bg-gradient-to-b from-[#1E3A8A]/10 to-[#F9F9F9]"
 >
     <div className="relative max-w-7xl mx-auto z-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-12 px-4">
-    <div className="flex-shrink-0">
+    <div className="flex-shrink-0" data-anim="slide-left">
   <Image
     src="/Avatar With BG.png"
     alt="Avatar"
@@ -408,7 +381,7 @@ export default function PodcastLandingPage() {
 </div>
       <div className="text-center lg:text-left flex-1 max-w-2xl">
         <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
-          <h2 className="text-4xl md:text-6xl font-bold text-[#1E2E42] font-poppins whitespace-nowrap animate-fadeIn">
+          <h2 data-anim="fade" className="text-4xl md:text-6xl font-bold text-[#1E2E42] font-poppins whitespace-nowrap">
           Let&apos;s Connect!
           </h2>
           <Image
@@ -416,14 +389,15 @@ export default function PodcastLandingPage() {
             alt="Connect Icon"
             width={140}
             height={140}
+            data-anim="slide-right"
             className="w-20 h-20 md:w-35 md:h-35 rounded-full -translate-y-2"
           />
         </div>
-        <p className="text-lg md:text-xl text-[#000000] leading-relaxed mb-8">
+        <p data-anim="fade" data-anim-delay="100" className="text-lg md:text-xl text-[#000000] leading-relaxed mb-8">
           Have questions or want to collaborate? Reach out to us!
           <span className="text-[#B69951] font-semibold"></span>
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center lg:justify-start">
+        <div data-anim="slide-up" data-anim-delay="150" className="flex flex-col sm:flex-row gap-4 w-full justify-center lg:justify-start">
           <button
             onClick={() => {
               setModalType('contact');
@@ -449,17 +423,17 @@ export default function PodcastLandingPage() {
 
 
 {/* Footer */}
-<footer id="collaborate" ref={footerRef} className="relative py-32 px-6 bg-gradient-to-b from-[#1E3A8A]/10 to-[#F9F9F9] overflow-hidden">
+<footer id="collaborate" className="relative py-32 px-6 bg-gradient-to-b from-[#1E3A8A]/10 to-[#F9F9F9] overflow-hidden">
   {/* Background Minimal Creative Shapes */}
-  <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#D4AF37]/10 rounded-full filter blur-3xl animate-pulse-slow"></div>
-  <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#1E3A8A]/10 rounded-full filter blur-3xl animate-pulse-slow"></div>
+  <div className="absolute -top-40 -left-40 w-96 h-96 bg-[#D4AF37]/10 rounded-full filter blur-3xl"></div>
+  <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-[#1E3A8A]/10 rounded-full filter blur-3xl"></div>
   <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-[#D4AF37]/5 rounded-full filter blur-2xl -translate-x-1/2 -translate-y-1/2"></div>
 
   {/* Content Container */}
   <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-16">
 
     {/* Left Side: Logo & Channel Links */}
-    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[30px]">
+    <div className="order-2 lg:order-1 flex-1 flex flex-col items-center gap-2 relative lg:translate-y-[30px]" data-anim="fade">
       {/* Podcast Logo */}
       <Image
         src="/logo1.png"
@@ -470,7 +444,7 @@ export default function PodcastLandingPage() {
       />
 
       {/* Channel Links */}
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:translate-x-[-50px]">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 lg:translate-x-[-50px]" data-anim="slide-up" data-anim-delay="100">
         <div className="flex flex-col items-center">
           <h3 className="text-xl font-bold text-[#1E2E42] mb-3">Listen on</h3>
           <div className="flex gap-8 mt-2 justify-center">
@@ -485,7 +459,7 @@ export default function PodcastLandingPage() {
             </a>
           </div>
         </div>
-        <div className="flex flex-col items-center lg:translate-x-[80px]">
+        <div className="flex flex-col items-center lg:translate-x-[80px]" data-anim="slide-up" data-anim-delay="150">
           <h3 className="text-xl font-bold text-[#1E2E42] mb-3">Follow us</h3>
           <div className="flex gap-8 mt-2 justify-center flex-wrap">
             <a href="https://www.facebook.com/CSKspeaks/" target="_blank">
@@ -509,8 +483,8 @@ export default function PodcastLandingPage() {
     </div>
 
     {/* Right Side: Collaboration Form */}
-    <section className="order-1 lg:order-2 flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-lg w-full max-w-lg lg:-translate-y-[100px]">
-      <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left animate-fadeIn">Feature in the Podcast</h3>
+    <section className="order-1 lg:order-2 flex-1 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-lg w-full max-w-lg lg:-translate-y-[100px]" data-anim="slide-left">
+      <h3 className="text-2xl font-bold text-[#B69951] mb-6 text-center lg:text-left">Feature in the Podcast</h3>
       <form className="flex flex-col gap-4">
         <input
           type="text"
@@ -546,12 +520,12 @@ export default function PodcastLandingPage() {
       </form>
     </section>
   </div>
-      <div className="mt-11 md:-mt-19 md:ml-195 text-center text-lg text-[#1E2E42]">
+      <div className="mt-11 md:-mt-19 md:ml-195 text-center text-lg text-[#1E2E42]" data-anim="fade">
         <p className="mb-1 font-bold">Email: csk@cskspeaks.com</p>
         <p className="mb-1 font-bold">Phone: +91 9949488181</p>
       </div>
-      <hr className="my-9 border-[#1E2E42] opacity-50 mt-20" />
-      <p className="text-center text-sm text-[#1E2E42] mt-1">&copy; 2025 The Legacy Blueprint. All rights reserved.</p>
+      <hr className="my-9 border-[#1E2E42] opacity-50 mt-20" data-anim="fade" />
+      <p className="text-center text-sm text-[#1E2E42] mt-1" data-anim="fade" data-anim-delay="100">&copy; 2025 The Legacy Blueprint. All rights reserved.</p>
 </footer>
 
   {/* Modal */}
