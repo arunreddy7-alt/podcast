@@ -138,6 +138,7 @@ body {
 /* Animation Utility Classes */
 .animate-fadeIn {
   animation: fadeIn 0.8s ease-out;
+  animation-fill-mode: both;
 }
 
 .animate-fadeInFromRight {
