@@ -14,23 +14,10 @@ export default function PodcastLandingPage() {
   const [overlayVisible, setOverlayVisible] = useState(true);
   const videoRef = useRef(null);
 
-  // Loading overlay: hide when window is ready or after a short delay
+  // Loading overlay: hide after 3 seconds
   useEffect(() => {
-    const onReady = () => setLoading(false);
-    if (typeof window !== 'undefined') {
-      if (document.readyState === 'complete') {
-        setLoading(false);
-      } else {
-        window.addEventListener('load', onReady);
-      }
-    }
-    const safety = setTimeout(() => setLoading(false), 1500);
-    return () => {
-      if (typeof window !== 'undefined') {
-        window.removeEventListener('load', onReady);
-      }
-      clearTimeout(safety);
-    };
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -102,9 +89,9 @@ export default function PodcastLandingPage() {
           <Image
             src="/logo1.png"
             alt="The Legacy Blueprint"
-            width={560}
-            height={560}
-            className="w-auto h-80"
+            width={700}
+            height={700}
+            className="w-auto h-96 opacity-0 animate-fadeIn"
             priority
           />
         </div>
@@ -185,7 +172,7 @@ export default function PodcastLandingPage() {
         alt="About Us Image"
         width={120}
         height={120}
-        className="rounded-full -ml-8 md:-ml-35 w-12 h-12 md:w-30 md:h-30"
+        className="rounded-full w-16 h-16 md:w-32 md:h-32"
       />
     </div>
     <h2 data-anim="fade" className="text-3xl md:text-5xl font-bold text-[#1E2E42] font-poppins -ml-4 md:ml-0">About us</h2>
