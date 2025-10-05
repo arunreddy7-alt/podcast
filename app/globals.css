@@ -1,0 +1,182 @@
+
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-poppins: var(--font-poppins);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Background Image Utilities */
+.bg-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(30, 58, 138, 0.7) 50%, rgba(30, 58, 138, 0.9) 100%);
+  z-index: -2;
+}
+
+.bg-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+  z-index: -1;
+}
+
+/* Optional: Add a subtle texture pattern */
+.bg-texture {
+  background-image:
+    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%);
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fadeInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(255,255,255,0.5), 0 0 10px rgba(255,255,255,0.5), 0 0 15px rgba(255,255,255,0.5);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.8);
+  }
+}
+
+/* Animation Utility Classes */
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out;
+  animation-fill-mode: both;
+}
+
+.animate-fadeInFromRight {
+  animation: fadeInFromRight 0.8s ease-out;
+}
+
+.animate-fadeInFromLeft {
+  animation: fadeInFromLeft 0.8s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.6s ease-out;
+}
+
+.animate-stagger.animate-slideUp > * {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-stagger.animate-slideUp > *:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.animate-stagger.animate-slideUp > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.animate-stagger.animate-slideUp > *:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.video-overlay-fade {
+  transition: opacity 0.3s ease;
+}

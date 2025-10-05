@@ -1,0 +1,8 @@
+- [x] Import EmailJS in app/page.js
+- [x] Initialize EmailJS with public key in useEffect
+- [x] Add state for footer and modal form data
+- [x] Add onSubmit handler for footer form
+- [x] Add onSubmit handler for modal form
+- [x] Make form inputs controlled with state
+- [x] Handle success/error responses
+- [x] Replace modal form EmailJS keys with provided service and template keys
