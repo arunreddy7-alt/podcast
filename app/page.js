@@ -423,7 +423,7 @@ export default function PodcastLandingPage() {
     <div className="relative max-w-7xl mx-auto z-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-12 px-4">
     <div className="flex-shrink-0" data-anim="slide-left">
   <Image
-    src="/Avatar With BG.png"
+    src="/pfp.png"
     alt="Avatar"
     width={500}
     height={500}
