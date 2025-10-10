@@ -143,6 +143,13 @@ export default function PodcastLandingPage() {
     }
   };
 
+  const episodeKeywords = [
+    ["Introduction", "Why", "Defining Legacy", "Purpose", "Host's Vision", "Rapport Building"],
+    ["Framework", "Pillars", "Blueprint", "Foundation", "Structure", "Core Concepts"],
+    ["Visioning", "Exercise", "Workshop", "Future-Pacing", "Intention", "Personal Design"],
+    ["Actionables", "Daily Practices", "Habits", "Consistency", "Micro-Actions", "Integration"]
+  ];
+
   // Removed all scroll-based animations and observers
 
   // Removed LoadingComponent and conditional render
@@ -345,6 +352,13 @@ export default function PodcastLandingPage() {
         <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
           This episode offers a structured personal development tool to envision your future impact. Learn how to align your choices today with the legacy you want to be remembered for tomorrow.
         </p>
+        <div className="flex gap-2 flex-wrap mt-4">
+          {episodeKeywords[2].map((keyword, idx) => (
+            <span key={idx} className="bg-[#B69951]/20 text-[#1E2E42] px-1.5 py-0.5 rounded-full text-xs font-medium">
+              {keyword}
+            </span>
+          ))}
+        </div>
         <div className="flex gap-2 flex-wrap mt-2">
           <a href="https://open.spotify.com/episode/6YAd9bi9tjOshxmGDslTVh?si=fa279ded9fa94fb0" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Spotify</a>
           <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000727064950" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Apple Podcast</a>
@@ -374,6 +388,13 @@ export default function PodcastLandingPage() {
         <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
           Explore the foundational principles of legacy building: Build People. Grow Businesses. Leave a Mark. Featuring insights from the life of Ratan Tata and how these pillars empower leadership and lasting change.
         </p>
+        <div className="flex gap-2 flex-wrap mt-4">
+          {episodeKeywords[1].map((keyword, idx) => (
+            <span key={idx} className="bg-[#B69951]/20 text-[#1E2E42] px-1.5 py-0.5 rounded-full text-xs font-medium">
+              {keyword}
+            </span>
+          ))}
+        </div>
         <div className="flex gap-2 flex-wrap mt-2">
           <a href="https://open.spotify.com/episode/0YpGbT7gRxNUvkJecDakPg?si=e7efc653133c40ad" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Spotify</a>
           <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000724132239" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Apple Podcast</a>
@@ -403,6 +424,13 @@ export default function PodcastLandingPage() {
         <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
           In the very first episode of The Legacy Blueprint, we ask a timeless question: beyond wealth and recognition, what truly defines your legacy? This podcast sets the tone for all future episodes on significance, purpose, and intentional impact.
         </p>
+        <div className="flex gap-2 flex-wrap mt-4">
+          {episodeKeywords[0].map((keyword, idx) => (
+            <span key={idx} className="bg-[#B69951]/20 text-[#1E2E42] px-1.5 py-0.5 rounded-full text-xs font-medium">
+              {keyword}
+            </span>
+          ))}
+        </div>
         <div className="flex gap-2 flex-wrap mt-2">
           <a href="https://open.spotify.com/episode/65uL5CyzsWzUOafWxlyBhE?si=c8d56d1d10414b70" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Spotify</a>
           <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000721960129" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Apple Podcast</a>
