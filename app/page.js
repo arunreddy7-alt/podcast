@@ -349,7 +349,7 @@ export default function PodcastLandingPage() {
         <a href="https://youtu.be/A4BkuRFrDY0?si=oHemWId1OA4FhD_4" target="_blank" className="text-[#B69951] hover:underline font-semibold">
           Watch Trailer
         </a>
-        <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
+        <p className="text-md md:text-lg text-[#000000] leading-relaxed">
           This episode offers a structured personal development tool to envision your future impact. Learn how to align your choices today with the legacy you want to be remembered for tomorrow.
         </p>
         <div className="flex gap-2 flex-wrap mt-4">
@@ -385,7 +385,7 @@ export default function PodcastLandingPage() {
         <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" target="_blank" className="text-[#B69951] hover:underline font-semibold">
           Watch Trailer
         </a>
-        <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
+        <p className="text-md md:text-lg text-[#000000] leading-relaxed">
           Explore the foundational principles of legacy building: Build People. Grow Businesses. Leave a Mark. Featuring insights from the life of Ratan Tata and how these pillars empower leadership and lasting change.
         </p>
         <div className="flex gap-2 flex-wrap mt-4">
@@ -421,7 +421,7 @@ export default function PodcastLandingPage() {
         <a href="https://youtu.be/jTqLnlQO9Ro?si=1SG80K-BQVbKfBj-" target="_blank" className="text-[#B69951] hover:underline font-semibold">
           Watch Trailer
         </a>
-        <p className="text-lg md:text-xl text-[#000000] leading-relaxed">
+        <p className="text-md md:text-lg text-[#000000] leading-relaxed">
           In the very first episode of The Legacy Blueprint, we ask a timeless question: beyond wealth and recognition, what truly defines your legacy? This podcast sets the tone for all future episodes on significance, purpose, and intentional impact.
         </p>
         <div className="flex gap-2 flex-wrap mt-4">
