@@ -382,9 +382,14 @@ export default function PodcastLandingPage() {
         <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
           EP02 | Unpacking the 3 Pillars of a Powerful Legacy
         </h3>
-        <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" target="_blank" className="text-[#B69951] hover:underline font-semibold">
-          Watch Trailer
-        </a>
+        <div className="flex gap-4 items-center">
+          <a href="https://youtu.be/DxPu76zLzbM?si=9ZfXkpQNMN5e3NFp" target="_blank" className="text-[#B69951] hover:underline font-semibold">
+            Watch Trailer
+          </a>
+          <a href="https://drive.google.com/uc?export=download&id=1ZUmIRAlXV6uxAEoYkFuRcAL7hd6PHft-" download className="bg- text-[#B69951] px-3 py-2 rounded-md font-semibold hover transition transform text-md hover:underline">
+            Download Self Reflection Tool
+          </a>
+        </div>
         <p className="text-md md:text-lg text-[#000000] leading-relaxed">
           Explore the foundational principles of legacy building: Build People. Grow Businesses. Leave a Mark. Featuring insights from the life of Ratan Tata and how these pillars empower leadership and lasting change.
         </p>
