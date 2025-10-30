@@ -147,7 +147,10 @@ export default function PodcastLandingPage() {
     ["Introduction", "Why", "Defining Legacy", "Purpose", "Host's Vision", "Rapport Building"],
     ["Framework", "Pillars", "Blueprint", "Foundation", "Structure", "Core Concepts"],
     ["Visioning", "Exercise", "Workshop", "Future-Pacing", "Intention", "Personal Design"],
-    ["Actionables", "Daily Practices", "Habits", "Consistency", "Micro-Actions", "Integration"]
+    ["Actionables", "Daily Practices", "Habits", "Consistency", "Micro-Actions", "Integration"],
+    ["Actionables", "Daily Practices", "Habits", "Consistency", "Micro-Actions", "Integration"],
+    ["Relationships", "Connection", "Emotional Impact", "Mentorship", "Nurturing", "Human Footprint"]
+
   ];
 
   // Removed all scroll-based animations and observers
@@ -250,7 +253,7 @@ export default function PodcastLandingPage() {
     <h2 data-anim="fade" className="text-3xl md:text-5xl font-bold text-[#1E2E42] font-poppins -ml-4 md:ml-0">About us</h2>
   </div>
   <p data-anim="fade" data-anim-delay="100" className="text-base md:text-xl text-black leading-relaxed mb-6 md:mb-8">
-    Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekhar, each episode is a quiet invitation to pause, reflect, and design the legacy you&apos;re living every single day.
+    Welcome to <span className="text-[#B69951] font-semibold">The Legacy Blueprint</span> — a values-driven podcast about significance, not just success. Hosted by Dr. Chandrashekar, each episode is a quiet invitation to pause, reflect, and design the legacy you&apos;re living every single day.
   </p>
 
   {/* Video Container */}
@@ -331,6 +334,77 @@ export default function PodcastLandingPage() {
 
   <div className="relative max-w-7xl mx-auto z-10">
     <div className="flex flex-col gap-25">
+    <div className="episode flex flex-col md:flex-row items-center gap-16 md:gap-20">
+      <div className="md:w-1/2" data-anim="slide-left">
+        <Image
+          src="/ep05.jpg"
+          alt="EP05 |"
+          width={400}
+          height={300}
+          className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+        />
+      </div>
+      <div className="md:w-1/2 flex flex-col gap-6" data-anim="fade" data-anim-delay="100">
+        <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
+        EP05 | The People You Touch: Crafting a Legacy Beyond Bloodlines ft. MSR & Pavan Allena 
+        </h3>
+        <a href="https://youtu.be/SyXOp2M_Qqs?si=lFNaxu46Oojuds9U" target="_blank" className="text-[#B69951] hover:underline font-semibold">
+          Watch Trailer
+        </a>
+        <p className="text-md md:text-lg text-[#000000] leading-relaxed">
+        In a world where legacy is often seen as something passed down through family or fortune, this episode asks a deeper question—What if legacy was about the lives you touch, not the bloodlines you share?        </p>
+        <div className="flex gap-2 flex-wrap mt-4">
+          {episodeKeywords[5].map((keyword, idx) => (
+            <span key={idx} className="bg-[#B69951]/20 text-[#1E2E42] px-1.5 py-0.5 rounded-full text-xs font-medium">
+              {keyword}
+            </span>
+          ))}
+        </div>
+        <div className="flex gap-2 flex-wrap mt-2">
+          <a href="https://open.spotify.com/episode/3BhvBDTMIxuhL6En7DCuT4?si=NsRUVTx7QZGFND1pr7vjUA" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Spotify</a>
+          <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700?i=1000727064950" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Apple Podcast</a>
+          <a href="https://youtu.be/SyXOp2M_Qqs?si=lFNaxu46Oojuds9U" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on YouTube</a>
+        </div>
+      </div>
+    </div>
+      {/* Episode 4 - Image Left */}
+      <div className="episode flex flex-col md:flex-row-reverse items-center gap-24 md:gap-32">
+      <div className="md:w-1/2" data-anim="slide-right">
+        <Image
+          src="/ep04.jpg"
+          alt="EP04 |"
+          width={400}
+          height={300}
+          className="w-full max-h-[28rem] md:max-h-[32rem] object-contain rounded-2xl shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+        />
+      </div>
+      <div className="md:w-1/2 flex flex-col gap-6 -mt-5 md:mt-0" data-anim="fade" data-anim-delay="100">
+        <h3 className="text-3xl md:text-4xl font-bold text-[#1E2E42]">
+        EP04 | Small Steps, Big ImpactWeaving Legacy into Your Everyday life
+               </h3>
+        <div className="flex gap-4 items-center">
+          <a href="https://youtu.be/Edt9Vm4LV1M?si=GliJ5zjU8JIjBS1Z" target="_blank" className="text-[#B69951] hover:underline font-semibold">
+            Watch Trailer
+          </a>
+          
+        </div>
+        <p className="text-md md:text-lg text-[#000000] leading-relaxed">
+        Your legacy doesn’t begin someday.
+It begins the moment you decide to own your day. Start small. Start now. Start with intention.        </p>
+        <div className="flex gap-2 flex-wrap mt-4">
+          {episodeKeywords[4].map((keyword, idx) => (
+            <span key={idx} className="bg-[#B69951]/20 text-[#1E2E42] px-1.5 py-0.5 rounded-full text-xs font-medium">
+              {keyword}
+            </span>
+          ))}
+        </div>
+        <div className="flex gap-2 flex-wrap mt-2">
+          <a href="https://open.spotify.com/episode/63v67oTjDHRERHLsrDUIqq?si=BqM0IEmdRkGOAzz6wZlYZA" className="bg-[#B69951] text-[#000000] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Spotify</a>
+          <a href="https://podcasts.apple.com/in/podcast/the-legacy-blueprint-with-csk/id1833255700" className="bg-[#1E2E42] text-[#FFFFFF] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Listen on Apple Podcast</a>
+          <a href="https://youtu.be/Edt9Vm4LV1M?si=GliJ5zjU8JIjBS1Z" className="bg-[#FFFFFF] border border-[#1E3A8A] text-[#1E3A8A] px-3 py-2 rounded-md font-semibold hover:scale-105 transition transform text-sm">Watch on YouTube</a>
+        </div>
+      </div>
+    </div>
       {/* Episode 3 - Image Left */}
       <div className="episode flex flex-col md:flex-row items-center gap-16 md:gap-20">
       <div className="md:w-1/2" data-anim="slide-left">
